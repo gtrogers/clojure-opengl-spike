@@ -1,0 +1,6 @@
+.idea
+.lein-failures
+*.iml
+native
+lib
+target
