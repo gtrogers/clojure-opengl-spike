@@ -1,4 +1,4 @@
-(ns game.box
+(ns game.shaders
   (:require [clojure.java.io :as io])
   (:import [org.lwjgl.opengl ARBFragmentShader ARBShaderObjects ARBVertexShader GL11]))
 
@@ -25,19 +25,3 @@
     (print (ARBShaderObjects/glGetInfoLogARB fragShader
              (ARBShaderObjects/glGetObjectParameteriARB fragShader ARBShaderObjects/GL_OBJECT_INFO_LOG_LENGTH_ARB)))
   program))
-
-(defn gl3f [x y z]
-  (GL11/glVertex3f x y z))
-
-(defn draw [shaderProgram]
-  (ARBShaderObjects/glUseProgramObjectARB shaderProgram)
-  (GL11/glLoadIdentity)
-  (GL11/glTranslatef 0.0 0.0 -10.0)
-  (GL11/glColor3f 1.0 1.0 1.0)
-  (GL11/glBegin GL11/GL_QUADS)
-  (gl3f -5.0 3.0 0.0)
-  (gl3f 5.0 3.0 0.0)
-  (gl3f 5.0 -3.0 0.0)
-  (gl3f -5.0 -3.0 0.0)
-  (GL11/glEnd)
-  (ARBShaderObjects/glUseProgramObjectARB 0))

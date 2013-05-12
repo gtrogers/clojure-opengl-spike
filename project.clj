@@ -6,4 +6,4 @@
   :jvm-opts [~(str "-Djava.library.path=native/:"
                 (System/getProperty "java.library.path"))]
   :main game.core
-  :aot [game.core game.box])
+  :aot [game.core game.shaders game.cube])

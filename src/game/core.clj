@@ -1,5 +1,5 @@
 (ns game.core
-  (:require game.box)
+  (:require game.shaders game.cube)
   (:import [java.util Random]
            [org.lwjgl.opengl Display DisplayMode GL11 ARBVertexShader ARBFragmentShader]
            [org.lwjgl.util.glu GLU]))
@@ -27,17 +27,18 @@
 
 (defn render [program]
   (GL11/glClear (bit-or GL11/GL_COLOR_BUFFER_BIT GL11/GL_DEPTH_BUFFER_BIT))
-  (game.box/draw program)
+  (game.cube/draw program)
   (Display/update)
   (Display/sync 60))
 
 (defn -main [& args]
   (initGl)
-  (let [program (game.box/initShaders)]
+
+  (let [shaderProgram (game.shaders/initShaders)]
     (loop [close? (Display/isCloseRequested)]
       (if-not close?
         (do
-          (render program)
+          (render shaderProgram)
           (recur (Display/isCloseRequested))))))
 
   (Display/destroy))
